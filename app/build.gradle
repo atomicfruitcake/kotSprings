@@ -1,0 +1,60 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.5")
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'application'
+}
+
+apply plugin: 'kotlin'
+apply plugin: "org.springframework.boot"
+
+jar {
+    baseName = 'kotSprings'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+dependencies {
+    implementation platform('org.jetbrains.kotlin:kotlin-bom')
+    implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'mysql:mysql-connector-java:8.0.31'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    runtimeOnly 'org.jetbrains.kotlin:kotlin-reflect:1.7.21'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.5'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.7.5'
+
+
+}
+
+testing {
+    suites {
+        // Configure the built-in test suite
+        test {
+            // Use Kotlin Test test framework
+            useKotlinTest()
+        }
+    }
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'kotsprings.ApplicationKt'
+}

@@ -1,0 +1,19 @@
+server:
+  port : 9000
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.jdbc.batch_size: 20
+      hibernate.cache.use_query_cache: false
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_structured_entries: false
+      hibernate.cache.use_minimal_puts: false
+  datasource:
+    #SPRING_DATASOURCE_URL environment variable will be something like -> jdbc:sqlserver://MySqlServer\\MyInstance:1433;DatabaseName=MyDbName;
+    url: jdbc:mysql://127.0.0.1:3306/kotSprings
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
