@@ -1,6 +1,9 @@
 package kotsprings.models
 
+import com.fasterxml.jackson.annotation.JsonFormat
+import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -13,16 +16,12 @@ import javax.persistence.Table
 data class UserModel (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,
-    @Column(name = "user_name", unique = true, nullable = false)
+    @Column(name = "userName", unique = true, nullable = false)
     val userName: String,
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "firstName", nullable = false)
     val firstName: String,
-    @Column(name = "middle_name", nullable = true)
-    val middleName: String?,
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "lastName", nullable = false)
     val lastName: String,
-    @Column(name = "email_address", nullable = false)
-    val emailId: String,
-    @Column(name = "day_of_birth", nullable = false)
-    val dayOfBirth: LocalDate
+    @Column(name = "emailAddress", nullable = false)
+    val emailAddress: String,
 )
