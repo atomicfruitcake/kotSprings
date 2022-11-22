@@ -14,14 +14,23 @@ import javax.persistence.Table
 @Entity
 @Table(name = "users")
 data class UserModel (
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long,
+
     @Column(name = "userName", unique = true, nullable = false)
-    val userName: String,
-    @Column(name = "firstName", nullable = false)
-    val firstName: String,
-    @Column(name = "lastName", nullable = false)
-    val lastName: String,
-    @Column(name = "emailAddress", nullable = false)
-    val emailAddress: String,
-)
+    var userName: String,
+
+    @Column(name = "firstName", nullable = true)
+    var firstName: String,
+
+    @Column(name = "lastName", nullable = true)
+    var lastName: String,
+
+    @Column(name = "emailAddress", nullable = true)
+    var emailAddress: String,
+
+    @Column(name = "dateOfBirth", nullable = true)
+    var dateOfBirth: LocalDate,
+) {}

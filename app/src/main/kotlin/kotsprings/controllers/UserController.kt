@@ -1,7 +1,9 @@
 package kotsprings.controllers
 
+import com.google.gson.Gson
 import kotsprings.models.UserModel
 import kotsprings.services.UserService
+
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -14,13 +16,22 @@ class UserController(private val userService: UserService) {
     }
 
     @PutMapping("/user")
-    fun putUser(@RequestBody body: UserModel): UserModel {
-        println(body)
-        return userService.createUser(body)
+    fun putUser(@RequestBody user: UserModel): UserModel {
+        println(user)
+        return userService.createUser(user)
     }
 
     @PostMapping("/user/{id}")
-    fun postUser(@RequestBody body: UserModel): UserModel {
-        return userService.updateUser(body)
+    fun postUser(@PathVariable id: Long, @RequestBody user: UserModel): UserModel {
+        return userService.updateUser(id, user)
+    }
+
+    @PostMapping("/user/email/{id}")
+    fun postUserEmail(@PathVariable id: Long, @RequestBody body: String): UserModel {
+        data class PostUserEmailBody(val emailAddress: String)
+
+        val postUserEmailBody = Gson().fromJson(body, PostUserEmailBody::class.java)
+
+        return userService.updateUserEmail(id, newEmailAddress = postUserEmailBody.emailAddress)
     }
 }

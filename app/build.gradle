@@ -12,11 +12,17 @@ buildscript {
 
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.10'
+    id 'org.jetbrains.kotlin.plugin.allopen' version '1.6.10'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.10'
+
     id 'application'
 }
 
 apply plugin: 'kotlin'
-apply plugin: "org.springframework.boot"
+apply plugin: 'org.springframework.boot'
+apply plugin: 'org.jetbrains.kotlin.plugin.jpa'
+apply plugin: 'org.jetbrains.kotlin.plugin.allopen'
 
 jar {
     baseName = 'kotSprings'
@@ -29,6 +35,10 @@ repositories {
     maven { url "https://repo.spring.io/milestone" }
 }
 
+compileKotlin {
+
+}
+
 dependencies {
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
     implementation 'com.google.code.gson:gson:2.10'
@@ -37,11 +47,13 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'mysql:mysql-connector-java:8.0.31'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    runtimeOnly 'org.jetbrains.kotlin:kotlin-reflect:1.7.21'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.5'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.7.5'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.21'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
 }
+apply plugin: 'kotlinx-serialization'
 
 testing {
     suites {
