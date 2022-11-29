@@ -43,31 +43,6 @@ data class UserModel (
     @Column(name = "created", nullable = true)
     private var created: LocalDate,
 ) {
-//    constructor(
-//        userName: String,
-//        firstName: String,
-//        lastName: String,
-//        emailAddress: String,
-//        dateOfBirth: LocalDate = LocalDate.now(),
-//        lastModified: LocalDate = LocalDate.now(),
-//        created: LocalDate = LocalDate.now(),
-//    ): this (
-//        userName,
-//        firstName,
-//        lastName,
-//        emailAddress,
-//        dateOfBirth,
-//        lastModified,
-//        created
-//    ) {
-//        this.userName = userName
-//        this.firstName = firstName
-//        this.lastName = lastName
-//        this.emailAddress = emailAddress
-//        this.dateOfBirth = dateOfBirth
-//        this.lastModified = lastModified
-//        this.created = LocalDate.now()
-//    }
 
     @PrePersist
     fun onCreate() {

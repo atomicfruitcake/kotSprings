@@ -7,6 +7,7 @@ import kotsprings.models.UserModel
 import kotsprings.repositories.UserRepository
 import kotsprings.utils.emailAddressIsValid
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 @Service
@@ -15,9 +16,17 @@ class UserService(private val repository: UserRepository) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     fun getUser(userId: Long): UserModel? {
+        logger.info("Finding user with userId $userId")
         return repository.findById(userId).orElseThrow {
             UserNotFoundException("No user with id=$userId found")
         }
+    }
+
+    fun getAllUsers(
+        sortKey: String? = "id"
+    ): MutableIterable<UserModel> {
+        logger.info("Getting all users")
+        return repository.findAll(Sort.by(sortKey ?: "id"))
     }
 
     fun createUser(user: UserModel): UserModel {

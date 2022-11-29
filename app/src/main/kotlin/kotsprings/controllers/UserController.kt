@@ -24,16 +24,28 @@ class UserController(private val userService: UserService) {
     /**
      * Get a user given a user's ID
      *
-     * @param id Long - UserId of user to fetch from URL path
+     * @param userId Long - UserId of user to fetch from URL path
      * @return User's data if user exists
      */
-    @GetMapping("/user/{id}")
-    fun getUser(@PathVariable id: Long): UserModel? {
+    @GetMapping("/user/{userId}")
+    fun getUser(@PathVariable userId: Long): UserModel? {
         try {
-            return userService.getUser(id)
+            return userService.getUser(userId)
         } catch (ex: UserNotFoundException) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, ex.localizedMessage, ex)
         }
+    }
+
+    /**
+     * Get all users
+     *
+     * @return List of all users available
+     */
+    @GetMapping("/user/all")
+    fun getAllUsers(
+        @RequestParam(value = "sortKey", required = false) sortKey: String?
+    ): MutableIterable<UserModel> {
+        return if (sortKey != null) userService.getAllUsers(sortKey) else userService.getAllUsers()
     }
 
     /**

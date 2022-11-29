@@ -12,6 +12,7 @@ buildscript {
 
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.10'
     id 'org.jetbrains.kotlin.plugin.allopen' version '1.6.10'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.10'
@@ -43,6 +44,7 @@ dependencies {
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation 'io.github.serpro69:kotlin-faker:1.12.0'
     implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'mysql:mysql-connector-java:8.0.31'
@@ -52,10 +54,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.7.5'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.21'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'com.h2database:h2:2.1.214'
+    implementation 'org.slf4j:slf4j-simple:2.0.5'
+    implementation 'org.slf4j:slf4j-api:2.0.5'
     implementation 'org.springframework.boot:spring-boot-starter-test:2.7.5'
-
 }
 apply plugin: 'kotlinx-serialization'
 

@@ -36,6 +36,16 @@ class BookController(private val bookService: BookService) {
     }
 
     /**
+     * Get all books in the library
+     *
+     * @return List of all books in the library
+     */
+    @GetMapping("/book/all")
+    fun getBook(): MutableList<BookModel> {
+        return bookService.getAllBooks()
+    }
+
+    /**
      * Create book a new book for the library
      *
      * @param book Book object to add to library

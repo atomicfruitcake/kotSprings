@@ -34,6 +34,16 @@ class BookService(private val repository: BookRepository) {
     }
 
     /**
+     * Get all books in the library
+     *
+     * @return Mutable<BookModel> object
+     */
+    fun getAllBooks(): MutableList<BookModel> {
+        logger.info("Getting all books")
+        return repository.findAll()
+    }
+
+    /**
      * Create book
      *
      * @param book Book object to be added to library
@@ -58,6 +68,7 @@ class BookService(private val repository: BookRepository) {
         }
         curBook.title = book.title
         curBook.author = book.author
+        curBook.genre = book.genre
         curBook.yearPublished = book.yearPublished
         curBook.borrowerUserId = book.borrowerUserId
 

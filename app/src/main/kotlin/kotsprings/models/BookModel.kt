@@ -19,6 +19,9 @@ data class BookModel (
     @Column(name = "author", nullable = true)
     var author: String,
 
+    @Column(name = "genre", nullable = true)
+    var genre: String,
+
     @Column(name = "yearPublished", nullable = true)
     var yearPublished: Int?,
 
