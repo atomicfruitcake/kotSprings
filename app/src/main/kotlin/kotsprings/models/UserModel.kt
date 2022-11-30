@@ -13,9 +13,10 @@ import javax.persistence.Table
 @Entity
 @Table(name = "users")
 data class UserModel (
-    val id: Long,
-    val created: LocalDate,
-    val lastModified: LocalDate,
+
+    val id: Long = 0L,
+    val created: LocalDate = LocalDate.now(),
+    val lastModified: LocalDate = LocalDate.now(),
 
     @Column(name = "userName", unique = true, nullable = false)
     var userName: String,

@@ -10,7 +10,7 @@ abstract class AbstractEntityModel (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long,
+    private var id: Long = 0L,
 
     @LastModifiedDate
     @Column(name = "lastModified", nullable = true, updatable = false)

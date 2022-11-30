@@ -1,11 +1,14 @@
 package kotsprings.services
 
+import kotsprings.enums.LoanEventType
 import kotsprings.exceptions.BookAlreadyLoanedException
 import kotsprings.exceptions.BookNotFoundException
 import kotsprings.exceptions.InvalidUserIdException
 import kotsprings.models.BookModel
 import kotsprings.repositories.BookRepository
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 /**
@@ -19,6 +22,8 @@ class BookService(private val repository: BookRepository) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
+    @Autowired
+    private lateinit var bookLoanEventService: BookLoanEventService
     /**
      * Get book from the DB given a bookId
      *
@@ -36,15 +41,18 @@ class BookService(private val repository: BookRepository) {
     /**
      * Get all books in the library
      *
+     * @param sortKey String? - Optional sort key to sort the books by. Default is 'id'
+
      * @return Mutable<BookModel> object
      */
-    fun getAllBooks(): MutableList<BookModel> {
-        logger.info("Getting all books")
-        return repository.findAll()
-    }
+    fun getAllBooks(
+        sortKey: String? = "id"
+    ): MutableList<BookModel> {
+        logger.info("Getting all books sorted by $sortKey")
+        return repository.findAll(Sort.by(sortKey ?: "id")) }
 
     /**
-     * Create book
+     * Create a new book to be entered
      *
      * @param book Book object to be added to library
      * @return Book Object that has been created
@@ -55,7 +63,7 @@ class BookService(private val repository: BookRepository) {
     }
 
     /**
-     * Update book
+     * Update an existing book with new details
      *
      * @param bookId Long - UniqueId of book
      * @param book Book Object containing updates to be applied
@@ -93,6 +101,9 @@ class BookService(private val repository: BookRepository) {
             )
         }
         bookToLoan.borrowerUserId = userId
+        bookLoanEventService.recordLoanEvent(
+            LoanEventType.BORROWING, userId, bookId
+        )
         return repository.save(bookToLoan)
     }
 

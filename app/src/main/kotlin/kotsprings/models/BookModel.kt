@@ -6,9 +6,10 @@ import javax.persistence.*
 @Entity
 @Table(name = "books")
 data class BookModel (
-    val id: Long,
-    val created: LocalDate,
-    val lastModified: LocalDate,
+
+    val id: Long = 0L,
+    val created: LocalDate = LocalDate.now(),
+    val lastModified: LocalDate = LocalDate.now(),
 
     @Column(name = "title", nullable = false)
     var title: String,
