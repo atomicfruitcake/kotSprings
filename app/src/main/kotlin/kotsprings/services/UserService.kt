@@ -80,6 +80,5 @@ class UserService(private val repository: UserRepository) {
         } catch (ex: Exception) {
             logger.warn("Cannot delete user $userId as no user exists with that id")
         }
-
     }
 }

@@ -63,13 +63,9 @@ dependencies {
 }
 apply plugin: 'kotlinx-serialization'
 
-testing {
-    suites {
-        // Configure the built-in test suite
-        tasks.test {
-            useJUnitPlatform()
-        }
-    }
+test {
+    useJUnitPlatform()
+    failFast = true
 }
 
 application {

@@ -1,7 +1,5 @@
 package kotsprings.models
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
 import java.time.LocalDate
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -15,10 +13,9 @@ import javax.persistence.Table
 @Entity
 @Table(name = "users")
 data class UserModel (
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
+    val created: LocalDate,
+    val lastModified: LocalDate,
 
     @Column(name = "userName", unique = true, nullable = false)
     var userName: String,
@@ -35,22 +32,5 @@ data class UserModel (
     @Column(name = "dateOfBirth", nullable = true)
     var dateOfBirth: LocalDate,
 
-    @LastModifiedDate
-    @Column(name = "lastModified", nullable = true, updatable = false)
-    private var lastModified: LocalDate,
+) : AbstractEntityModel(id, created, lastModified)
 
-    @CreatedDate
-    @Column(name = "created", nullable = true)
-    private var created: LocalDate,
-) {
-
-    @PrePersist
-    fun onCreate() {
-        this.created = LocalDate.now()
-    }
-
-    @PreUpdate
-    fun onUpdate() {
-        this.lastModified = LocalDate.now()
-    }
-}

@@ -89,7 +89,7 @@ class BookService(private val repository: BookRepository) {
         }
         if (bookToLoan.borrowerUserId != null) {
             throw BookAlreadyLoanedException(
-                "Book ${bookToLoan.title} is already on lended to user ${bookToLoan.borrowerUserId}"
+                "Book ${bookToLoan.title} is already lent to user ${bookToLoan.borrowerUserId}"
             )
         }
         bookToLoan.borrowerUserId = userId
